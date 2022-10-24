@@ -1409,3 +1409,25 @@ spec:
           name: netop-manager-cni-config
           optional: true
         name: cni-config-volume
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netop-manager-cni-config
+  namespace: netop-manager-system
+data:
+  cniconfig.yaml: |-
+    cniConfig:
+      cko-cni-calico:
+      - "01-calico.conflist"
+      - "01-calico.conf"
+      - "10-calico.conflist"
+      - "10-calico.conf"
+      cko-cni-aci:
+      - "01-opflex-cni.conf"
+      - "10-opflex-cni.conf"
+      cko-cni-cilium:
+      - "05-cilium.conf"
+      cko-cni-awsvpc:
+      - "10-aws.conflist"
+      - "10-aws.conf"
