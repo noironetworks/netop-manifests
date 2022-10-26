@@ -29,7 +29,7 @@ spec:
       name: Age
       type: date
     - description: State/Phase of Installer
-      jsonPath: .status.operatorStatus
+      jsonPath: .status.state
       name: Phase
       type: string
     - description: Cni Type
@@ -62,7 +62,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: true
+                        default: false
                         type: boolean
                       options:
                         additionalProperties:
@@ -161,7 +161,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: true
+                        default: false
                         type: boolean
                       options:
                         additionalProperties:
@@ -243,7 +243,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: true
+                        default: false
                         type: boolean
                       options:
                         additionalProperties:
@@ -334,7 +334,7 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: true
+                          default: false
                           description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
@@ -358,7 +358,7 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: true
+                          default: false
                           description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
