@@ -61,14 +61,15 @@ spec:
                   workload:
                     description: First key should be internal child api
                     properties:
+                      managedComponent:
+                        default: true
+                        type: boolean
                       options:
                         additionalProperties:
                           type: string
                         type: object
                       type:
                         type: string
-                      unmanaged:
-                        type: boolean
                       version:
                         type: string
                     required:
@@ -88,8 +89,6 @@ spec:
                 type: string
               cniVersion:
                 type: string
-              internalState:
-                type: string
               ipam:
                 type: string
               managedState:
@@ -97,7 +96,7 @@ spec:
               observedGeneration:
                 format: int64
                 type: integer
-              operatorStatus:
+              state:
                 type: string
               upgradeStatus:
                 properties:
@@ -161,14 +160,15 @@ spec:
                   workload:
                     description: First key should be internal child api
                     properties:
+                      managedComponent:
+                        default: true
+                        type: boolean
                       options:
                         additionalProperties:
                           type: string
                         type: object
                       type:
                         type: string
-                      unmanaged:
-                        type: boolean
                       version:
                         type: string
                     required:
@@ -242,14 +242,15 @@ spec:
                   workload:
                     description: First key should be internal child api
                     properties:
+                      managedComponent:
+                        default: true
+                        type: boolean
                       options:
                         additionalProperties:
                           type: string
                         type: object
                       type:
                         type: string
-                      unmanaged:
-                        type: boolean
                       version:
                         type: string
                     required:
@@ -333,8 +334,8 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: false
-                          description: ManagedComponent field is ignored for platform components and must be set to true to manage networking component.
+                          default: true
+                          description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
                           additionalProperties:
@@ -357,8 +358,8 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: false
-                          description: ManagedComponent field is ignored for platform components and must be set to true to manage networking component.
+                          default: true
+                          description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
                           additionalProperties:
