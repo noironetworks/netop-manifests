@@ -26,7 +26,7 @@ spec:
       name: Age
       type: date
     - description: State/Phase of Installer
-      jsonPath: .status.state
+      jsonPath: .status.operatorStatus
       name: Phase
       type: string
     - description: Cni Type
@@ -59,7 +59,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: false
+                        default: true
                         type: boolean
                       options:
                         additionalProperties:
@@ -158,7 +158,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: false
+                        default: true
                         type: boolean
                       options:
                         additionalProperties:
@@ -240,7 +240,7 @@ spec:
                     description: First key should be internal child api
                     properties:
                       managedComponent:
-                        default: false
+                        default: true
                         type: boolean
                       options:
                         additionalProperties:
@@ -331,7 +331,7 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: false
+                          default: true
                           description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
@@ -355,7 +355,7 @@ spec:
                             type: array
                           type: object
                         managedComponent:
-                          default: false
+                          default: true
                           description: ManagedComponent field is ignored for platform components and must be set to false to adopt networking components without managing them.
                           type: boolean
                         options:
@@ -570,42 +570,6 @@ rules:
   - daemonsets
   - deployments
   - statefulsets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - argoproj.io
-  resources:
-  - applications
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - argoproj.io
-  resources:
-  - applications/finalizers
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - argoproj.io
-  resources:
-  - applications/status
   verbs:
   - create
   - delete
@@ -1294,6 +1258,7 @@ spec:
         - --health-probe-bind-address=:8081
         - --metrics-bind-address=127.0.0.1:8080
         - --leader-elect
+        - --zap-log-level=info
         command:
         - /manager
         env:
