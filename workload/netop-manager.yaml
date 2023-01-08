@@ -378,9 +378,9 @@ spec:
               componentStatus:
                 additionalProperties:
                   properties:
-                    state:
+                    lastUpdated:
                       type: string
-                    status:
+                    mode:
                       type: string
                     type:
                       type: string
@@ -1392,7 +1392,7 @@ spec:
         - --secure-listen-address=0.0.0.0:8443
         - --upstream=http://127.0.0.1:9999/
         - --logtostderr=true
-        - --v=0
+        - --v=2
         image: gcr.io/kubebuilder/kube-rbac-proxy:v0.13.0
         name: kube-rbac-proxy
         ports:
@@ -1415,7 +1415,7 @@ spec:
         - --health-probe-bind-address=:8081
         - --metrics-bind-address=127.0.0.1:9999
         - --leader-elect
-        - --zap-log-level=2
+        - --zap-log-level=0
         command:
         - /manager
         env:
