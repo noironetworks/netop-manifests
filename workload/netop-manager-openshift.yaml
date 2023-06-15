@@ -56,6 +56,12 @@ spec:
           spec:
             description: CniOpsSpec defines the desired state of CniOps.
             properties:
+              arrayOptions:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                type: object
               config:
                 properties:
                   workload:
@@ -81,6 +87,8 @@ spec:
           status:
             description: CniOpsStatus defines the observed state of CniOps.
             properties:
+              cniState:
+                type: string
               cniStatus:
                 additionalProperties:
                   type: string
@@ -1703,8 +1711,8 @@ spec:
           name: cni-bin
         - mountPath: /mnt/system-cni
           name: system-cni-dir
-        - mountPath: /mnt/multus-cni
-          name: multus-cni-dir
+        - mountPath: /mnt/delegate-cni
+          name: delegating-cni-dir
       hostNetwork: true
       securityContext:
         runAsNonRoot: false
@@ -1732,9 +1740,9 @@ spec:
           type: Directory
         name: system-cni-dir
       - hostPath:
-          path: /var/run/multus/cni/
+          path: /run
           type: Directory
-        name: multus-cni-dir
+        name: delegating-cni-dir
 ---
 apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
