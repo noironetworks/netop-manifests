@@ -1706,6 +1706,7 @@ spec:
         - mountPath: /mnt/delegate-cni
           name: delegating-cni-dir
       hostNetwork: true
+      priorityClassName: netop-priority
       securityContext:
         runAsNonRoot: false
       serviceAccountName: netop-manager-controller-manager
