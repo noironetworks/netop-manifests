@@ -56,6 +56,12 @@ spec:
           spec:
             description: CniOpsSpec defines the desired state of CniOps.
             properties:
+              arrayOptions:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                type: object
               config:
                 properties:
                   workload:
@@ -81,6 +87,8 @@ spec:
           status:
             description: CniOpsStatus defines the observed state of CniOps.
             properties:
+              cniState:
+                type: string
               cniStatus:
                 additionalProperties:
                   type: string
