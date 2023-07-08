@@ -3,9 +3,6 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
-    openshift.io/run-level: "0"
-  annotations:
-    openshift.io/node-selector: ''
   name: netop-manager-system
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -56,6 +53,12 @@ spec:
           spec:
             description: CniOpsSpec defines the desired state of CniOps.
             properties:
+              arrayOptions:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                type: object
               config:
                 properties:
                   workload:
@@ -81,6 +84,8 @@ spec:
           status:
             description: CniOpsStatus defines the observed state of CniOps.
             properties:
+              cniState:
+                type: string
               cniStatus:
                 additionalProperties:
                   type: string
@@ -789,6 +794,20 @@ rules:
   - update
   - watch
 - apiGroups:
+  - aci.fabricattachment
+  resources:
+  - nodefabricnetworkattachments
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - aci.fabricattachment
+  resources:
+  - nodefabricnetworkattachments/status
+  verbs:
+  - get
+- apiGroups:
   - apiextensions.k8s.io
   resources:
   - customresourcedefinitions
@@ -894,6 +913,20 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - k8s.cni.cncf.io
+  resources:
+  - network-attachment-definitions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - k8s.cni.cncf.io
+  resources:
+  - network-attachment-definitions/status
+  verbs:
+  - get
 - apiGroups:
   - nettools.debug
   resources:
